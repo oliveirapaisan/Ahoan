@@ -1,0 +1,60 @@
+name: Recibir fichas enviadas desde Ahoan
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  publish:
+    if: contains(github.event.issue.body, '<!-- AHOAN_WORKSHEET_JSON_START -->')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Guardar ficha enviada
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const body = process.env.ISSUE_BODY || '';
+          const start = '<!-- AHOAN_WORKSHEET_JSON_START -->';
+          const end = '<!-- AHOAN_WORKSHEET_JSON_END -->';
+          const a = body.indexOf(start);
+          const b = body.indexOf(end);
+          if (a < 0 || b < 0 || b <= a) throw new Error('No se encontró la ficha enviada.');
+          const payload = JSON.parse(body.slice(a + start.length, b).trim());
+          if (!payload.key || !payload.target || !payload.fitxa) throw new Error('La ficha está incompleta.');
+          if (!['all', 'M.Oliveira'].includes(payload.target)) throw new Error('Destino no válido.');
+          const file = 'public/assignments.json';
+          fs.mkdirSync('public', { recursive: true });
+          let data = { assignments: [] };
+          if (fs.existsSync(file)) data = JSON.parse(fs.readFileSync(file, 'utf8'));
+          if (!Array.isArray(data.assignments)) data.assignments = [];
+          data.assignments = data.assignments.filter(x => !(x.key === payload.key && x.target === payload.target));
+          data.assignments.push({
+            key: payload.key,
+            target: payload.target,
+            fitxa: payload.fitxa,
+            sentAt: new Date().toISOString()
+          });
+          fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+          NODE
+
+      - name: Publicar cambios en GitHub
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/assignments.json
+          git commit -m "Publicar ficha enviada desde Ahoan" || echo "Sin cambios"
+          git push
+
+      - name: Cerrar solicitud de envío
+        run: gh issue close "${{ github.event.issue.number }}" --comment "Ficha recibida y publicada en Ahoan."
