@@ -75,9 +75,33 @@ export default function App() {
   const [teacherTab, setTeacherTab] = useState<TeacherTab>('arbela');
 
   // Teacher-created custom fitxak
+  const [publishedAssignments, setPublishedAssignments] = useState<Array<{ key: string; target: string; fitxa: CustomFitxa }>>([]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}assignments.json?${Date.now()}`)
+      .then((r) => r.ok ? r.json() : { assignments: [] })
+      .then((data) => setPublishedAssignments(Array.isArray(data.assignments) ? data.assignments : []))
+      .catch(() => setPublishedAssignments([]));
+  }, []);
+
+  const publishedForStudent = useMemo(() => publishedAssignments.filter((a) => a.target === 'all' || a.target === currentUser), [publishedAssignments, currentUser]);
+  const publishedFitxaKeys = useMemo(() => publishedForStudent.map((a) => a.key), [publishedForStudent]);
+
   const [customFitxak, setCustomFitxak] = useState<CustomFitxa[]>(() => {
     return loadCustomFitxakFromStorage();
   });
+
+  useEffect(() => {
+    if (!publishedAssignments.length) return;
+    const remoteFitxak = publishedAssignments.filter((a) => a.fitxa && a.fitxa.k).map((a) => a.fitxa);
+    setCustomFitxak((current) => {
+      const byKey = new Map(current.map((f) => [f.k, f]));
+      remoteFitxak.forEach((f) => byKey.set(f.k, f));
+      const merged = Array.from(byKey.values());
+      saveCustomFitxakToStorage(merged);
+      return merged;
+    });
+  }, [publishedAssignments]);
 
   // Grade records strictly for M.Oliveira
   const [grades, setGrades] = useState<GradeRecord[]>(() => {
@@ -243,6 +267,22 @@ export default function App() {
       c: newFitxa.level,
       id: newFitxa.subject,
     }));
+  };
+
+  const handleSendFitxa = (key: string) => {
+    const item = findAudioItem(key);
+    const questions = mergedFX[key] || [];
+    if (!item || !questions.length) return;
+    const fitxa: CustomFitxa = {
+      k: item.k, t: item.t, subject: state.id, level: state.c, u: item.u,
+      description: item.description || '', passage: item.passage,
+      activityType: item.activityType, f: item.f, questions,
+      createdAt: new Date().toISOString().slice(0, 10),
+    };
+    const payload = { key, target: 'M.Oliveira', fitxa };
+    const body = `Enviar esta ficha a M.Oliveira desde Ahoan.\n\n<!-- AHOAN_WORKSHEET_JSON_START -->\n${JSON.stringify(payload)}\n<!-- AHOAN_WORKSHEET_JSON_END -->`;
+    const url = `https://github.com/oliveirapaisan/Ahoan/issues/new?title=${encodeURIComponent(`Enviar ficha ${item.t}`)}&body=${encodeURIComponent(body)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   // Delete custom fitxa
@@ -539,6 +579,8 @@ export default function App() {
             answers={state.ans}
             dataset={mergedD}
             questionsMap={mergedFX}
+            publishedFitxaKeys={publishedFitxaKeys}
+            onSendFitxa={handleSendFitxa}
             isTeacher={isTeacher}
             currentUser={currentUser}
             gradesPublished={published}
