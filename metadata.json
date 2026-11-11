@@ -1,0 +1,6 @@
+{
+  "name": "Ahoan Ikasleak",
+  "description": "Ahozko ulermena lantzeko plataforma ikasleentzat: entzuteak, galdetegiak eta ariketa interaktiboak euskaraz eta ingelesez.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

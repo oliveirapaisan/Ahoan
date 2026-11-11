@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #f7f6f2;
+    --card: #ffffff;
+    --tx: #1f2328;
+    --mu: #6b7280;
+    --bd: #e3e1da;
+    --ok: #1e8e4e;
+    --bad: #c9411f;
+  }
+
+  [data-theme="dark"] {
+    --bg: #17181b;
+    --card: #222428;
+    --tx: #ececec;
+    --mu: #9aa0a8;
+    --bd: #33363b;
+    --ok: #4cc27d;
+    --bad: #ff7a59;
+  }
+}
+
+.font-chalk {
+  font-family: 'Patrick Hand', 'Caveat', 'Comic Sans MS', cursive, sans-serif;
+}
+
+.font-caveat {
+  font-family: 'Caveat', cursive, sans-serif;
+}
+
+/* Authentic blackboard wooden frame */
+.arbela-frame {
+  background-color: #264333;
+  background-image: 
+    radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.25) 100%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 30px 30px, 30px 30px;
+  border: 12px solid #855835;
+  outline: 2px solid #573a21;
+  box-shadow: 
+    0 10px 35px -5px rgba(0, 0, 0, 0.4),
+    inset 0 0 45px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+/* Subtle chalk dust text shadow */
+.chalk-text {
+  color: #f4f1e6;
+  text-shadow: 0 0 1px rgba(244, 241, 230, 0.7), 0 0 8px rgba(244, 241, 230, 0.15);
+}
+
+.chalk-box {
+  background: rgba(18, 36, 27, 0.45);
+  border: 2px dashed rgba(244, 241, 230, 0.4);
+  backdrop-filter: blur(2px);
+}
