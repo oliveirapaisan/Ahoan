@@ -46,7 +46,7 @@ export const ArbelaView: React.FC<ArbelaViewProps> = ({
   const langData = effectiveData[currentLang] || { ext: {}, own: {} };
   const allExtList = (langData.ext && langData.ext[String(currentLevel)]) || [];
   const extList = isTeacher ? allExtList : allExtList.filter((item) => publishedFitxaKeys.includes(item.k));
-  const ownUrl = langData.own ? langData.own[String(currentLevel)] : undefined;
+  const ownUrl = isTeacher && langData.own ? langData.own[String(currentLevel)] : undefined;
 
   const [showAllAudios, setShowAllAudios] = useState(false);
 
