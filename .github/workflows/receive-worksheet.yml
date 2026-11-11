@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   publish:
-    if: contains(github.event.issue.body, '<!-- AHOAN_WORKSHEET_JSON_START -->')
+    if: github.event.issue.user.login == 'oliveirapaisan' && contains(github.event.issue.body, '<!-- AHOAN_WORKSHEET_JSON_START -->')
     runs-on: ubuntu-latest
     steps:
       - name: Descargar repositorio
