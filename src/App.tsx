@@ -235,15 +235,17 @@ export default function App() {
       if (!cloned[subj].ext[lvlStr]) {
         cloned[subj].ext[lvlStr] = [];
       }
-      cloned[subj].ext[lvlStr].push({
-        t: f.t,
-        k: f.k,
-        u: f.u,
-        f: f.f,
-        description: f.description,
-        passage: f.passage,
-        activityType: f.activityType,
-      });
+      if (!cloned[subj].ext[lvlStr].some((item: AudioItem) => item.k === f.k)) {
+        cloned[subj].ext[lvlStr].push({
+          t: f.t,
+          k: f.k,
+          u: f.u,
+          f: f.f,
+          description: f.description,
+          passage: f.passage,
+          activityType: f.activityType,
+        });
+      }
     });
     return cloned;
   }, [customFitxak]);
