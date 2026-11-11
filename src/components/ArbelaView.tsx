@@ -9,6 +9,8 @@ interface ArbelaViewProps {
   answers: Record<string, Record<number, number> & { done?: boolean }>;
   dataset?: Record<AppSubject, LanguageData>;
   questionsMap?: Record<string, Question[]>;
+  publishedFitxaKeys?: string[];
+  onSendFitxa?: (key: string) => void;
   isTeacher?: boolean;
   currentUser?: string;
   gradesPublished?: boolean;
@@ -25,6 +27,8 @@ export const ArbelaView: React.FC<ArbelaViewProps> = ({
   answers,
   dataset,
   questionsMap,
+  publishedFitxaKeys = [],
+  onSendFitxa,
   isTeacher = false,
   currentUser = 'Ikaslea',
   gradesPublished = false,
@@ -40,7 +44,8 @@ export const ArbelaView: React.FC<ArbelaViewProps> = ({
 
   const effectiveData = dataset || D;
   const langData = effectiveData[currentLang] || { ext: {}, own: {} };
-  const extList = (langData.ext && langData.ext[String(currentLevel)]) || [];
+  const allExtList = (langData.ext && langData.ext[String(currentLevel)]) || [];
+  const extList = isTeacher ? allExtList : allExtList.filter((item) => publishedFitxaKeys.includes(item.k));
   const ownUrl = langData.own ? langData.own[String(currentLevel)] : undefined;
 
   const [showAllAudios, setShowAllAudios] = useState(false);
@@ -242,6 +247,9 @@ export const ArbelaView: React.FC<ArbelaViewProps> = ({
 
                 {/* Action buttons */}
                 <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                  {isTeacher && onSendFitxa && (
+                    <button onClick={() => onSendFitxa(primaryAudio.k)} className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold text-sm rounded-xl shadow cursor-pointer">📨 Enviar al alumno</button>
+                  )}
                   <button
                     onClick={() => onOpenFitxa(primaryAudio.k)}
                     className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f4f1e6] hover:bg-white text-[#264333] font-bold text-sm sm:text-base rounded-xl shadow-md hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
@@ -310,6 +318,7 @@ export const ArbelaView: React.FC<ArbelaViewProps> = ({
                           </div>
 
                           <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/10 mt-2">
+                            {isTeacher && onSendFitxa && <button onClick={() => onSendFitxa(item.k)} className="text-xs px-2 py-1 rounded-lg bg-amber-400 text-stone-950 font-bold cursor-pointer">📨 Enviar</button>}
                             <button
                               onClick={() => onOpenFitxa(item.k)}
                               className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#f4f1e6] hover:bg-white text-[#264333] font-bold text-xs rounded-lg transition-all shadow cursor-pointer"
