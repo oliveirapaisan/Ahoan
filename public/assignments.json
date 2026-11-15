@@ -1,3 +1,122 @@
 {
-  "assignments": []
+  "assignments": [
+    {
+      "key": "e4a2",
+      "target": "M.Oliveira",
+      "fitxa": {
+        "k": "e4a2",
+        "t": "Audioa 2 · Ahozko ulermena",
+        "subject": "euskera",
+        "level": 4,
+        "u": "https://www.ivoox.com/player_ej_10072002_6_1.html?c1=978e2b",
+        "description": "Naturaren berriak eta ingurumenaren zaintza (Ahozko ulermeneko 10 galdera).",
+        "activityType": "audio",
+        "f": 1,
+        "questions": [
+          {
+            "q": "Zein da entzute honen gai nagusia?",
+            "o": [
+              "Naturaren zaintza eta ekologia",
+              "Kirol txapelketa bat",
+              "Eskolako jaia",
+              "Sukaldaritza errezeta"
+            ],
+            "a": 0
+          },
+          {
+            "q": "Nork parte hartzen du elkarrizketan?",
+            "o": [
+              "Bi irakaslek",
+              "Aurkezleak eta gonbidatu batek",
+              "Ume talde batek bakarrik",
+              "Ezezagun batek"
+            ],
+            "a": 1
+          },
+          {
+            "q": "Zer gomendio ematen da entzutean?",
+            "o": [
+              "Bizikletaz gehiago ibiltzea",
+              "Ura eta energia aurreztea",
+              "Zuhaitzak landatzea",
+              "Aurreko guztiak"
+            ],
+            "a": 3
+          },
+          {
+            "q": "Non gertatzen dira aipatutako ekintzak?",
+            "o": [
+              "Euskal Herriko herri batean",
+              "Itsasontzi batean",
+              "Mendirantz bidean",
+              "Liburutegian"
+            ],
+            "a": 0
+          },
+          {
+            "q": "Zergatik da garrantzitsua zuhaitzak zaintzea?",
+            "o": [
+              "Itzala eta aire garbia ematen dutelako",
+              "Txoriak uxatzeko",
+              "Egurra erretzeko bakarrik",
+              "Ez dira garrantzitsuak"
+            ],
+            "a": 0
+          },
+          {
+            "q": "Zer egiten dute ikasleek ingurumen astean?",
+            "o": [
+              "Hondakinak biltzen dituzte eta tailerrak egin",
+              "Etxean geratzen dira",
+              "Telebista ikusten dute",
+              "Azterketa luzea egiten dute"
+            ],
+            "a": 0
+          },
+          {
+            "q": "Nola bidaia daiteke modu ekologikoagoan?",
+            "o": [
+              "Oinez edo bizikletaz",
+              "Hegazkin pribatuan",
+              "Auto zahar batean bakarrik",
+              "Motor kutsagarriarekin"
+            ],
+            "a": 0
+          },
+          {
+            "q": "Zer proposamen egiten da eskolako jantokirako?",
+            "o": [
+              "Bertako eta sasoiko elikagaiak kontsumitzea",
+              "Plastikozko platerak erabiltzea",
+              "Janaria botatzea",
+              "Gozokiak bakarrik jatea"
+            ],
+            "a": 0
+          },
+          {
+            "q": "Zer jarrera gomendatzen da hondakinen aurrean?",
+            "o": [
+              "Birziklatzea eta berrerabiltzea",
+              "Lurrean botata uztea",
+              "Ibaian behera botatzea",
+              "Zabortegian erretzea"
+            ],
+            "a": 0
+          },
+          {
+            "q": "Zein da entzutearen azken mezua?",
+            "o": [
+              "Guztion artean planeta zaindu dezakegula",
+              "Berandu dela ezer konpontzeko",
+              "Ez dela ezer aldatu behar",
+              "Udan bakarrik zaintzea ingurunea"
+            ],
+            "a": 0
+          }
+        ],
+        "createdAt": "2026-11-15"
+      },
+      "sentAt": "2026-11-15T18:27:16.893Z"
+    }
+  ]
 }
