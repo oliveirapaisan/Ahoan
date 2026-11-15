@@ -117,6 +117,54 @@
         "createdAt": "2026-11-15"
       },
       "sentAt": "2026-11-15T18:27:16.893Z"
+    },
+    {
+      "key": "e4a3",
+      "target": "M.Oliveira",
+      "fitxa": {
+        "k": "e4a3",
+        "t": "Audioa 3",
+        "subject": "euskera",
+        "level": 4,
+        "u": "https://www.ivoox.com/player_ej_10071981_6_1.html?c1=978e2b",
+        "description": "Kultura eta kirol berriak ikasleentzat.",
+        "activityType": "audio",
+        "f": 1,
+        "questions": [
+          {
+            "q": "Zer nabarmentzen da albiste honetan?",
+            "o": [
+              "Kultur astea",
+              "Liburu azoka berria",
+              "Herriko jaietako ekitaldiak",
+              "Txango berezi bat"
+            ],
+            "a": 1
+          },
+          {
+            "q": "Zein adinetako ikasleei zuzenduta dago?",
+            "o": [
+              "Helduentzat bakarrik",
+              "Lehen hezkuntzako ikasleentzat",
+              "Unibertsitatekoentzat",
+              "Txikientzat"
+            ],
+            "a": 1
+          },
+          {
+            "q": "Zer sari banatuko dute?",
+            "o": [
+              "Margo kaxa",
+              "Irakurketa lehiaketako liburu sorta",
+              "Ordenagailu bat",
+              "Txartel bat zinemarako"
+            ],
+            "a": 1
+          }
+        ],
+        "createdAt": "2026-11-15"
+      },
+      "sentAt": "2026-11-15T18:28:40.352Z"
     }
   ]
 }
